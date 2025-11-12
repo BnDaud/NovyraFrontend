@@ -27,7 +27,7 @@ const Sidenav = () => {
 
   return (
     <>
-      <div className="flex flex-col h-screen bg-darkblue w-62">
+      <div className="flex flex-col h-screen bg-darkblue md:w-62 w-20 ">
         <div className="py-5 px-2 text-center border border-darkblue border-b-gray text-white">
           {" "}
           Novyra CMS
@@ -36,10 +36,10 @@ const Sidenav = () => {
           {" "}
           {navcontent.map((item) => {
             return (
-              <div className="flex  hover:text-white text-gray-300 border-amber-400 border-l-2 h-13 ">
+              <div className="flex  hover:text-white text-gray-300 border-amber-400  hover:bg-gray/30 border-l-2 h-13 hover:animate-pulse duration-1000 ">
                 {" "}
-                <div className=" flex  px-10 items-center gap-4">
-                  {item.logo} <p>{item.name}</p>
+                <div className=" flex  md:mx-10 mx-auto items-center gap-4">
+                  {item.logo} <p className="hidden md:block">{item.name}</p>
                 </div>{" "}
               </div>
             );
