@@ -39,6 +39,9 @@ function SocialMedia() {
           placeholder="https://"
           onChange={(e) => setTitle(e.target.value)}
         />
+      </div>{" "}
+      <div className="bg-blue-700 w-30 text-center text-white p-2 rounded hover:cursor-pointer transition duration-500 ease-in-out hover:-translate-y-1  hover:shadow-2xl">
+        Save Change
       </div>
     </div>
   );
