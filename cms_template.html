@@ -1,1246 +1,1357 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
-<head> 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Novyra Marketing - CMS Dashboard</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
-        /* CSS Variables - Using VTPremier Colors */
-        :root {
-            --primary: #0A4ABF;
-            --secondary: #09A5DB;
-            --success: #44B669;
-            --danger: #DC3545;
-            --warning: #FFC107;
-            --dark: #1e293b;
-            --light: #f8fafc;
-            --gray: #64748b;
-            --transition: all 0.3s ease;
-        }
+      /* CSS Variables - Using VTPremier Colors */
+      :root {
+        --primary: #0a4abf;
+        --secondary: #09a5db;
+        --success: #44b669;
+        --danger: #dc3545;
+        --warning: #ffc107;
+        --dark: #1e293b;
+        --light: #f8fafc;
+        --gray: #64748b;
+        --transition: all 0.3s ease;
+      }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
 
-        body {
-            line-height: 1.6;
-            color: var(--dark);
-            background-color: #f5f7fa;
-            overflow-x: hidden;
-            display: flex;
-            min-height: 100vh;
-        }
+      body {
+        line-height: 1.6;
+        color: var(--dark);
+        background-color: #f5f7fa;
+        overflow-x: hidden;
+        display: flex;
+        min-height: 100vh;
+      }
 
-        /* Typography */
-        h1, h2, h3, h4 {
-            line-height: 1.2;
-            margin-bottom: 1rem;
-        }
+      /* Typography */
+      h1,
+      h2,
+      h3,
+      h4 {
+        line-height: 1.2;
+        margin-bottom: 1rem;
+      }
 
-        h1 {
-            font-size: 2.2rem;
-            font-weight: 800;
-        }
+      h1 {
+        font-size: 2.2rem;
+        font-weight: 800;
+      }
 
-        h2 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-        }
+      h2 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+      }
 
-        h3 {
-            font-size: 1.4rem;
-            font-weight: 600;
-        }
+      h3 {
+        font-size: 1.4rem;
+        font-weight: 600;
+      }
 
-        h4 {
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
+      h4 {
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
 
-        p {
-            margin-bottom: 1rem;
-            color: var(--gray);
-        }
+      p {
+        margin-bottom: 1rem;
+        color: var(--gray);
+      }
 
-        /* Layout */
-        .container {
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
+      /* Layout */
+      .container {
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
 
-        /* Buttons */
-        .btn {
-            display: inline-block;
-            padding: 0.7rem 1.5rem;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-            cursor: pointer;
-            border: none;
-            font-size: 0.9rem;
-            text-align: center;
-        }
+      /* Buttons */
+      .btn {
+        display: inline-block;
+        padding: 0.7rem 1.5rem;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: var(--transition);
+        cursor: pointer;
+        border: none;
+        font-size: 0.9rem;
+        text-align: center;
+      }
 
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
+      .btn-primary {
+        background: var(--primary);
+        color: white;
+      }
 
-        .btn-primary:hover {
-            background: #083a9e;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(10, 74, 191, 0.2);
-        }
+      .btn-primary:hover {
+        background: #083a9e;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(10, 74, 191, 0.2);
+      }
 
-        .btn-success {
-            background: var(--success);
-            color: white;
-        }
+      .btn-success {
+        background: var(--success);
+        color: white;
+      }
 
-        .btn-success:hover {
-            background: #389e53;
-            transform: translateY(-2px);
-        }
+      .btn-success:hover {
+        background: #389e53;
+        transform: translateY(-2px);
+      }
 
-        .btn-danger {
-            background: var(--danger);
-            color: white;
-        }
+      .btn-danger {
+        background: var(--danger);
+        color: white;
+      }
 
-        .btn-danger:hover {
-            background: #c82333;
-            transform: translateY(-2px);
-        }
+      .btn-danger:hover {
+        background: #c82333;
+        transform: translateY(-2px);
+      }
 
-        .btn-outline {
-            background: transparent;
-            color: var(--primary);
-            border: 1px solid var(--primary);
-        }
+      .btn-outline {
+        background: transparent;
+        color: var(--primary);
+        border: 1px solid var(--primary);
+      }
 
-        .btn-outline:hover {
-            background: var(--primary);
-            color: white;
-        }
+      .btn-outline:hover {
+        background: var(--primary);
+        color: white;
+      }
 
-        .btn-sm {
-            padding: 0.4rem 0.8rem;
-            font-size: 0.8rem;
-        }
+      .btn-sm {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+      }
 
-        /* Sidebar */
+      /* Sidebar */
+      .sidebar {
+        width: 250px;
+        background: var(--dark);
+        color: white;
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        transition: var(--transition);
+        z-index: 100;
+      }
+
+      .sidebar-header {
+        padding: 1.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: white;
+        display: flex;
+        align-items: center;
+      }
+
+      .logo i {
+        margin-right: 0.5rem;
+        color: var(--primary);
+      }
+
+      .sidebar-menu {
+        padding: 1rem 0;
+      }
+
+      .menu-item {
+        display: flex;
+        align-items: center;
+        padding: 0.8rem 1.5rem;
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        transition: var(--transition);
+        border-left: 3px solid transparent;
+      }
+
+      .menu-item:hover,
+      .menu-item.active {
+        background: rgba(255, 255, 255, 0.05);
+        color: white;
+        border-left: 3px solid var(--primary);
+      }
+
+      .menu-item i {
+        margin-right: 0.8rem;
+        width: 20px;
+        text-align: center;
+      }
+
+      .menu-item.active i {
+        color: var(--primary);
+      }
+
+      /* Main Content */
+      .main-content {
+        flex: 1;
+        margin-left: 250px;
+        transition: var(--transition);
+      }
+
+      /* Topbar */
+      .topbar {
+        background: white;
+        padding: 1rem 1.5rem;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 99;
+      }
+
+      .search-bar {
+        display: flex;
+        align-items: center;
+        background: var(--light);
+        border-radius: 5px;
+        padding: 0.5rem 1rem;
+        width: 300px;
+      }
+
+      .search-bar input {
+        border: none;
+        background: transparent;
+        margin-left: 0.5rem;
+        width: 100%;
+        outline: none;
+      }
+
+      .topbar-actions {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      .notification-icon {
+        position: relative;
+        cursor: pointer;
+      }
+
+      .notification-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background: var(--danger);
+        color: white;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        font-size: 0.7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .user-profile {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        cursor: pointer;
+      }
+
+      .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+      }
+
+      /* Dashboard Content */
+      .dashboard-content {
+        padding: 2rem 1.5rem;
+      }
+
+      .section {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      /* Stats Cards */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .stat-card {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        transition: var(--transition);
+      }
+
+      .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .stat-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+        font-size: 1.5rem;
+      }
+
+      .stat-icon.blog {
+        background: rgba(10, 74, 191, 0.1);
+        color: var(--primary);
+      }
+
+      .stat-icon.portfolio {
+        background: rgba(68, 182, 105, 0.1);
+        color: var(--success);
+      }
+
+      .stat-icon.users {
+        background: rgba(255, 193, 7, 0.1);
+        color: var(--warning);
+      }
+
+      .stat-icon.views {
+        background: rgba(220, 53, 69, 0.1);
+        color: var(--danger);
+      }
+
+      .stat-info h3 {
+        font-size: 1.8rem;
+        margin-bottom: 0.2rem;
+      }
+
+      .stat-info p {
+        color: var(--gray);
+        margin: 0;
+        font-size: 0.9rem;
+      }
+
+      /* Tables */
+      .table-container {
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 0.8rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      th {
+        background: var(--light);
+        font-weight: 600;
+        color: var(--dark);
+      }
+
+      tr:hover {
+        background: #f8fafc;
+      }
+
+      .status {
+        display: inline-block;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+
+      .status.published {
+        background: rgba(68, 182, 105, 0.1);
+        color: var(--success);
+      }
+
+      .status.draft {
+        background: rgba(255, 193, 7, 0.1);
+        color: var(--warning);
+      }
+
+      .status.pending {
+        background: rgba(220, 53, 69, 0.1);
+        color: var(--danger);
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      /* Forms */
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 5px;
+        font-size: 1rem;
+        transition: var(--transition);
+      }
+
+      .form-control:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(10, 74, 191, 0.1);
+      }
+
+      textarea.form-control {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+      }
+
+      /* Tabs */
+      .tabs {
+        display: flex;
+        border-bottom: 1px solid #e2e8f0;
+        margin-bottom: 1.5rem;
+      }
+
+      .tab {
+        padding: 0.8rem 1.5rem;
+        cursor: pointer;
+        font-weight: 500;
+        color: var(--gray);
+        transition: var(--transition);
+        border-bottom: 2px solid transparent;
+      }
+
+      .tab.active {
+        color: var(--primary);
+        border-bottom: 2px solid var(--primary);
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      /* Cards Grid */
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .card {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        transition: var(--transition);
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .card-img {
+        height: 160px;
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+      }
+
+      .card-body {
+        padding: 1.5rem;
+      }
+
+      .card-title {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .card-text {
+        color: var(--gray);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      .card-meta {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.8rem;
+        color: var(--gray);
+      }
+
+      /* Modal */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal.active {
+        display: flex;
+      }
+
+      .modal-content {
+        background: white;
+        border-radius: 10px;
+        width: 90%;
+        max-width: 600px;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+
+      .modal-header {
+        padding: 1.5rem;
+        border-bottom: 1px solid #e2e8f0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .modal-body {
+        padding: 1.5rem;
+      }
+
+      .modal-footer {
+        padding: 1.5rem;
+        border-top: 1px solid #e2e8f0;
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+      }
+
+      .close-modal {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--gray);
+      }
+
+      /* Responsive */
+      @media (max-width: 992px) {
         .sidebar {
-            width: 250px;
-            background: var(--dark);
-            color: white;
-            height: 100vh;
-            position: fixed;
-            left: 0;
-            top: 0;
-            transition: var(--transition);
-            z-index: 100;
+          width: 70px;
         }
 
-        .sidebar-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        .sidebar .menu-text {
+          display: none;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: white;
-            display: flex;
-            align-items: center;
-        }
-
-        .logo i {
-            margin-right: 0.5rem;
-            color: var(--primary);
-        }
-
-        .sidebar-menu {
-            padding: 1rem 0;
-        }
-
-        .menu-item {
-            display: flex;
-            align-items: center;
-            padding: 0.8rem 1.5rem;
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            transition: var(--transition);
-            border-left: 3px solid transparent;
-        }
-
-        .menu-item:hover, .menu-item.active {
-            background: rgba(255, 255, 255, 0.05);
-            color: white;
-            border-left: 3px solid var(--primary);
-        }
-
-        .menu-item i {
-            margin-right: 0.8rem;
-            width: 20px;
-            text-align: center;
-        }
-
-        .menu-item.active i {
-            color: var(--primary);
-        }
-
-        /* Main Content */
         .main-content {
-            flex: 1;
-            margin-left: 250px;
-            transition: var(--transition);
+          margin-left: 70px;
         }
 
-        /* Topbar */
-        .topbar {
-            background: white;
-            padding: 1rem 1.5rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 99;
-        }
-
-        .search-bar {
-            display: flex;
-            align-items: center;
-            background: var(--light);
-            border-radius: 5px;
-            padding: 0.5rem 1rem;
-            width: 300px;
-        }
-
-        .search-bar input {
-            border: none;
-            background: transparent;
-            margin-left: 0.5rem;
-            width: 100%;
-            outline: none;
-        }
-
-        .topbar-actions {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .notification-icon {
-            position: relative;
-            cursor: pointer;
-        }
-
-        .notification-badge {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: var(--danger);
-            color: white;
-            border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            font-size: 0.7rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .user-profile {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            cursor: pointer;
-        }
-
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-        }
-
-        /* Dashboard Content */
-        .dashboard-content {
-            padding: 2rem 1.5rem;
-        }
-
-        .section {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        /* Stats Cards */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            padding: 1.5rem;
-            display: flex;
-            align-items: center;
-            transition: var(--transition);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .stat-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 1rem;
-            font-size: 1.5rem;
-        }
-
-        .stat-icon.blog {
-            background: rgba(10, 74, 191, 0.1);
-            color: var(--primary);
-        }
-
-        .stat-icon.portfolio {
-            background: rgba(68, 182, 105, 0.1);
-            color: var(--success);
-        }
-
-        .stat-icon.users {
-            background: rgba(255, 193, 7, 0.1);
-            color: var(--warning);
-        }
-
-        .stat-icon.views {
-            background: rgba(220, 53, 69, 0.1);
-            color: var(--danger);
-        }
-
-        .stat-info h3 {
-            font-size: 1.8rem;
-            margin-bottom: 0.2rem;
-        }
-
-        .stat-info p {
-            color: var(--gray);
-            margin: 0;
-            font-size: 0.9rem;
-        }
-
-        /* Tables */
-        .table-container {
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 0.8rem 1rem;
-            text-align: left;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        th {
-            background: var(--light);
-            font-weight: 600;
-            color: var(--dark);
-        }
-
-        tr:hover {
-            background: #f8fafc;
-        }
-
-        .status {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .status.published {
-            background: rgba(68, 182, 105, 0.1);
-            color: var(--success);
-        }
-
-        .status.draft {
-            background: rgba(255, 193, 7, 0.1);
-            color: var(--warning);
-        }
-
-        .status.pending {
-            background: rgba(220, 53, 69, 0.1);
-            color: var(--danger);
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        /* Forms */
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(10, 74, 191, 0.1);
-        }
-
-        textarea.form-control {
-            min-height: 120px;
-            resize: vertical;
+        .logo span {
+          display: none;
         }
 
         .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .search-bar {
+          width: 200px;
         }
 
-        /* Tabs */
-        .tabs {
-            display: flex;
-            border-bottom: 1px solid #e2e8f0;
-            margin-bottom: 1.5rem;
+        .user-name {
+          display: none;
         }
 
-        .tab {
-            padding: 0.8rem 1.5rem;
-            cursor: pointer;
-            font-weight: 500;
-            color: var(--gray);
-            transition: var(--transition);
-            border-bottom: 2px solid transparent;
+        .stats-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .stats-grid {
+          grid-template-columns: 1fr;
         }
 
-        .tab.active {
-            color: var(--primary);
-            border-bottom: 2px solid var(--primary);
+        .section-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 1rem;
         }
 
-        .tab-content {
-            display: none;
+        .action-buttons {
+          flex-direction: column;
         }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Cards Grid */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .card {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-            transition: var(--transition);
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-img {
-            height: 160px;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-        }
-
-        .card-body {
-            padding: 1.5rem;
-        }
-
-        .card-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .card-text {
-            color: var(--gray);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .card-meta {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.8rem;
-            color: var(--gray);
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 600px;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid #e2e8f0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-body {
-            padding: 1.5rem;
-        }
-
-        .modal-footer {
-            padding: 1.5rem;
-            border-top: 1px solid #e2e8f0;
-            display: flex;
-            justify-content: flex-end;
-            gap: 1rem;
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--gray);
-        }
-
-        /* Responsive */
-        @media (max-width: 992px) {
-            .sidebar {
-                width: 70px;
-            }
-            
-            .sidebar .menu-text {
-                display: none;
-            }
-            
-            .main-content {
-                margin-left: 70px;
-            }
-            
-            .logo span {
-                display: none;
-            }
-            
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .search-bar {
-                width: 200px;
-            }
-            
-            .user-name {
-                display: none;
-            }
-            
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .section-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
-            }
-            
-            .action-buttons {
-                flex-direction: column;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Sidebar -->
     <div class="sidebar">
-        <div class="sidebar-header">
-            <div class="logo">
-                <i class="fas fa-rocket"></i>
-                <span>Novyra CMS</span>
-            </div>
+      <div class="sidebar-header">
+        <div class="logo">
+          <i class="fas fa-rocket"></i>
+          <span>Novyra CMS</span>
         </div>
-        <div class="sidebar-menu">
-            <a href="#" class="menu-item active" data-section="dashboard">
-                <i class="fas fa-tachometer-alt"></i>
-                <span class="menu-text">Dashboard</span>
-            </a>
-            <a href="#" class="menu-item" data-section="blog">
-                <i class="fas fa-blog"></i>
-                <span class="menu-text">Blog Posts</span>
-            </a>
-            <a href="#" class="menu-item" data-section="portfolio">
-                <i class="fas fa-briefcase"></i>
-                <span class="menu-text">Portfolio</span>
-            </a>
-            <a href="#" class="menu-item" data-section="users">
-                <i class="fas fa-users"></i>
-                <span class="menu-text">Users</span>
-            </a>
-            <a href="#" class="menu-item" data-section="settings">
-                <i class="fas fa-cog"></i>
-                <span class="menu-text">Settings</span>
-            </a>
-        </div>
+      </div>
+      <div class="sidebar-menu">
+        <a href="#" class="menu-item active" data-section="dashboard">
+          <i class="fas fa-tachometer-alt"></i>
+          <span class="menu-text">Dashboard</span>
+        </a>
+        <a href="#" class="menu-item" data-section="blog">
+          <i class="fas fa-blog"></i>
+          <span class="menu-text">Blog Posts</span>
+        </a>
+        <a href="#" class="menu-item" data-section="portfolio">
+          <i class="fas fa-briefcase"></i>
+          <span class="menu-text">Portfolio</span>
+        </a>
+        <a href="#" class="menu-item" data-section="users">
+          <i class="fas fa-users"></i>
+          <span class="menu-text">Users</span>
+        </a>
+        <a href="#" class="menu-item" data-section="settings">
+          <i class="fas fa-cog"></i>
+          <span class="menu-text">Settings</span>
+        </a>
+      </div>
     </div>
 
     <!-- Main Content -->
     <div class="main-content">
-        <!-- Topbar -->
-        <div class="topbar">
-            <div class="search-bar">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search...">
+      <!-- Topbar -->
+      <div class="topbar">
+        <div class="search-bar">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search..." />
+        </div>
+        <div class="topbar-actions">
+          <div class="notification-icon">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </div>
+          <div class="user-profile">
+            <div class="user-avatar">MA</div>
+            <div class="user-name">Michael Admin</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dashboard Content -->
+      <div class="dashboard-content">
+        <!-- Dashboard Section -->
+        <div class="section active" id="dashboard-section">
+          <h1>Dashboard</h1>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon blog">
+                <i class="fas fa-blog"></i>
+              </div>
+              <div class="stat-info">
+                <h3>24</h3>
+                <p>Blog Posts</p>
+              </div>
             </div>
-            <div class="topbar-actions">
-                <div class="notification-icon">
-                    <i class="fas fa-bell"></i>
-                    <span class="notification-badge">3</span>
-                </div>
-                <div class="user-profile">
-                    <div class="user-avatar">MA</div>
-                    <div class="user-name">Michael Admin</div>
-                </div>
+            <div class="stat-card">
+              <div class="stat-icon portfolio">
+                <i class="fas fa-briefcase"></i>
+              </div>
+              <div class="stat-info">
+                <h3>15</h3>
+                <p>Portfolio Items</p>
+              </div>
             </div>
+            <div class="stat-card">
+              <div class="stat-icon users">
+                <i class="fas fa-users"></i>
+              </div>
+              <div class="stat-info">
+                <h3>8</h3>
+                <p>Users</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon views">
+                <i class="fas fa-eye"></i>
+              </div>
+              <div class="stat-info">
+                <h3>2.4K</h3>
+                <p>Monthly Views</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="section-header">
+              <h2>Recent Blog Posts</h2>
+              <a href="#" class="btn btn-primary" id="add-blog-btn"
+                >Add New Post</a
+              >
+            </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>10 Social Media Trends for 2023</td>
+                    <td>Sarah Johnson</td>
+                    <td>Oct 15, 2023</td>
+                    <td><span class="status published">Published</span></td>
+                    <td>
+                      <div class="action-buttons">
+                        <button class="btn btn-sm btn-outline">Edit</button>
+                        <button class="btn btn-sm btn-danger">Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>SEO Strategies That Actually Work</td>
+                    <td>Michael Chen</td>
+                    <td>Oct 10, 2023</td>
+                    <td><span class="status published">Published</span></td>
+                    <td>
+                      <div class="action-buttons">
+                        <button class="btn btn-sm btn-outline">Edit</button>
+                        <button class="btn btn-sm btn-danger">Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Building a Brand Identity</td>
+                    <td>Emily Rodriguez</td>
+                    <td>Oct 5, 2023</td>
+                    <td><span class="status draft">Draft</span></td>
+                    <td>
+                      <div class="action-buttons">
+                        <button class="btn btn-sm btn-outline">Edit</button>
+                        <button class="btn btn-sm btn-danger">Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
 
-        <!-- Dashboard Content -->
-        <div class="dashboard-content">
-            <!-- Dashboard Section -->
-            <div class="section active" id="dashboard-section">
-                <h1>Dashboard</h1>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon blog">
-                            <i class="fas fa-blog"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h3>24</h3>
-                            <p>Blog Posts</p>
-                        </div>
+        <!-- Blog Section -->
+        <div class="section" id="blog-section">
+          <div class="section-header">
+            <h2>Blog Posts</h2>
+            <a href="#" class="btn btn-primary" id="add-blog-btn"
+              >Add New Post</a
+            >
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Author</th>
+                  <th>Categories</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>10 Social Media Trends for 2023</td>
+                  <td>Sarah Johnson</td>
+                  <td>Social Media, Trends</td>
+                  <td>Oct 15, 2023</td>
+                  <td><span class="status published">Published</span></td>
+                  <td>
+                    <div class="action-buttons">
+                      <button class="btn btn-sm btn-outline">Edit</button>
+                      <button class="btn btn-sm btn-danger">Delete</button>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon portfolio">
-                            <i class="fas fa-briefcase"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h3>15</h3>
-                            <p>Portfolio Items</p>
-                        </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>SEO Strategies That Actually Work</td>
+                  <td>Michael Chen</td>
+                  <td>SEO, Marketing</td>
+                  <td>Oct 10, 2023</td>
+                  <td><span class="status published">Published</span></td>
+                  <td>
+                    <div class="action-buttons">
+                      <button class="btn btn-sm btn-outline">Edit</button>
+                      <button class="btn btn-sm btn-danger">Delete</button>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon users">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h3>8</h3>
-                            <p>Users</p>
-                        </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Building a Brand Identity</td>
+                  <td>Emily Rodriguez</td>
+                  <td>Branding, Design</td>
+                  <td>Oct 5, 2023</td>
+                  <td><span class="status draft">Draft</span></td>
+                  <td>
+                    <div class="action-buttons">
+                      <button class="btn btn-sm btn-outline">Edit</button>
+                      <button class="btn btn-sm btn-danger">Delete</button>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon views">
-                            <i class="fas fa-eye"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h3>2.4K</h3>
-                            <p>Monthly Views</p>
-                        </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Content Marketing in 2023</td>
+                  <td>David Wilson</td>
+                  <td>Content, Marketing</td>
+                  <td>Sep 28, 2023</td>
+                  <td><span class="status published">Published</span></td>
+                  <td>
+                    <div class="action-buttons">
+                      <button class="btn btn-sm btn-outline">Edit</button>
+                      <button class="btn btn-sm btn-danger">Delete</button>
                     </div>
-                </div>
-
-                <div class="section">
-                    <div class="section-header">
-                        <h2>Recent Blog Posts</h2>
-                        <a href="#" class="btn btn-primary" id="add-blog-btn">Add New Post</a>
-                    </div>
-                    <div class="table-container">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Author</th>
-                                    <th>Date</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>10 Social Media Trends for 2023</td>
-                                    <td>Sarah Johnson</td>
-                                    <td>Oct 15, 2023</td>
-                                    <td><span class="status published">Published</span></td>
-                                    <td>
-                                        <div class="action-buttons">
-                                            <button class="btn btn-sm btn-outline">Edit</button>
-                                            <button class="btn btn-sm btn-danger">Delete</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>SEO Strategies That Actually Work</td>
-                                    <td>Michael Chen</td>
-                                    <td>Oct 10, 2023</td>
-                                    <td><span class="status published">Published</span></td>
-                                    <td>
-                                        <div class="action-buttons">
-                                            <button class="btn btn-sm btn-outline">Edit</button>
-                                            <button class="btn btn-sm btn-danger">Delete</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Building a Brand Identity</td>
-                                    <td>Emily Rodriguez</td>
-                                    <td>Oct 5, 2023</td>
-                                    <td><span class="status draft">Draft</span></td>
-                                    <td>
-                                        <div class="action-buttons">
-                                            <button class="btn btn-sm btn-outline">Edit</button>
-                                            <button class="btn btn-sm btn-danger">Delete</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Blog Section -->
-            <div class="section" id="blog-section">
-                <div class="section-header">
-                    <h2>Blog Posts</h2>
-                    <a href="#" class="btn btn-primary" id="add-blog-btn">Add New Post</a>
-                </div>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Author</th>
-                                <th>Categories</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>10 Social Media Trends for 2023</td>
-                                <td>Sarah Johnson</td>
-                                <td>Social Media, Trends</td>
-                                <td>Oct 15, 2023</td>
-                                <td><span class="status published">Published</span></td>
-                                <td>
-                                    <div class="action-buttons">
-                                        <button class="btn btn-sm btn-outline">Edit</button>
-                                        <button class="btn btn-sm btn-danger">Delete</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>SEO Strategies That Actually Work</td>
-                                <td>Michael Chen</td>
-                                <td>SEO, Marketing</td>
-                                <td>Oct 10, 2023</td>
-                                <td><span class="status published">Published</span></td>
-                                <td>
-                                    <div class="action-buttons">
-                                        <button class="btn btn-sm btn-outline">Edit</button>
-                                        <button class="btn btn-sm btn-danger">Delete</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Building a Brand Identity</td>
-                                <td>Emily Rodriguez</td>
-                                <td>Branding, Design</td>
-                                <td>Oct 5, 2023</td>
-                                <td><span class="status draft">Draft</span></td>
-                                <td>
-                                    <div class="action-buttons">
-                                        <button class="btn btn-sm btn-outline">Edit</button>
-                                        <button class="btn btn-sm btn-danger">Delete</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Content Marketing in 2023</td>
-                                <td>David Wilson</td>
-                                <td>Content, Marketing</td>
-                                <td>Sep 28, 2023</td>
-                                <td><span class="status published">Published</span></td>
-                                <td>
-                                    <div class="action-buttons">
-                                        <button class="btn btn-sm btn-outline">Edit</button>
-                                        <button class="btn btn-sm btn-danger">Delete</button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Portfolio Section -->
-            <div class="section" id="portfolio-section">
-                <div class="section-header">
-                    <h2>Portfolio Items</h2>
-                    <a href="#" class="btn btn-primary" id="add-portfolio-btn">Add New Item</a>
-                </div>
-                <div class="cards-grid">
-                    <div class="card">
-                        <div class="card-img">
-                            <i class="fas fa-briefcase"></i>
-                        </div>
-                        <div class="card-body">
-                            <h3 class="card-title">TechSolutions Website</h3>
-                            <p class="card-text">Complete website redesign and digital marketing strategy for a tech startup.</p>
-                            <div class="card-meta">
-                                <span>Web Design</span>
-                                <span>Oct 2023</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-img">
-                            <i class="fas fa-briefcase"></i>
-                        </div>
-                        <div class="card-body">
-                            <h3 class="card-title">BrandFuture Campaign</h3>
-                            <p class="card-text">Social media marketing campaign for a fashion brand launch.</p>
-                            <div class="card-meta">
-                                <span>Social Media</span>
-                                <span>Sep 2023</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-img">
-                            <i class="fas fa-briefcase"></i>
-                        </div>
-                        <div class="card-body">
-                            <h3 class="card-title">E-commerce SEO</h3>
-                            <p class="card-text">SEO optimization and content strategy for an online retailer.</p>
-                            <div class="card-meta">
-                                <span>SEO</span>
-                                <span>Aug 2023</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Users Section -->
-            <div class="section" id="users-section">
-                <div class="section-header">
-                    <h2>Users</h2>
-                    <a href="#" class="btn btn-primary" id="add-user-btn">Add New User</a>
-                </div>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Role</th>
-                                <th>Status</th>
-                                <th>Last Login</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div style="display: flex; align-items: center;">
-                                        <div class="user-avatar" style="width: 30px; height: 30px; font-size: 0.8rem; margin-right: 0.5rem;">MA</div>
-                                        Michael Admin
-                                    </div>
-                                </td>
-                                <td>michael@novyra.com</td>
-                                <td>Administrator</td>
-                                <td><span class="status published">Active</span></td>
-                                <td>Today, 09:45 AM</td>
-                                <td>
-                                    <div class="action-buttons">
-                                        <button class="btn btn-sm btn-outline">Edit</button>
-                                        <button class="btn btn-sm btn-danger">Delete</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div style="display: flex; align-items: center;">
-                                        <div class="user-avatar" style="width: 30px; height: 30px; font-size: 0.8rem; margin-right: 0.5rem; background: var(--success);">SJ</div>
-                                        Sarah Johnson
-                                    </div>
-                                </td>
-                                <td>sarah@novyra.com</td>
-                                <td>Editor</td>
-                                <td><span class="status published">Active</span></td>
-                                <td>Yesterday, 03:20 PM</td>
-                                <td>
-                                    <div class="action-buttons">
-                                        <button class="btn btn-sm btn-outline">Edit</button>
-                                        <button class="btn btn-sm btn-danger">Delete</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div style="display: flex; align-items: center;">
-                                        <div class="user-avatar" style="width: 30px; height: 30px; font-size: 0.8rem; margin-right: 0.5rem; background: var(--warning);">MC</div>
-                                        Michael Chen
-                                    </div>
-                                </td>
-                                <td>michael.c@novyra.com</td>
-                                <td>Author</td>
-                                <td><span class="status published">Active</span></td>
-                                <td>Oct 15, 2023</td>
-                                <td>
-                                    <div class="action-buttons">
-                                        <button class="btn btn-sm btn-outline">Edit</button>
-                                        <button class="btn btn-sm btn-danger">Delete</button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Settings Section -->
-            <div class="section" id="settings-section">
-                <h2>Settings</h2>
-                <div class="tabs">
-                    <div class="tab active" data-tab="general">General</div>
-                    <div class="tab" data-tab="seo">SEO</div>
-                    <div class="tab" data-tab="social">Social Media</div>
-                    <div class="tab" data-tab="security">Security</div>
-                </div>
-
-                <div class="tab-content active" id="general-tab">
-                    <form>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">Site Title</label>
-                                <input type="text" class="form-control" value="Novyra Marketing">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Tagline</label>
-                                <input type="text" class="form-control" value="Digital Marketing Agency">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Site Description</label>
-                            <textarea class="form-control">We help businesses grow through strategic digital marketing, compelling branding, and results-driven campaigns.</textarea>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Admin Email</label>
-                            <input type="email" class="form-control" value="admin@novyra.com">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </form>
-                </div>
-
-                <div class="tab-content" id="seo-tab">
-                    <form>
-                        <div class="form-group">
-                            <label class="form-label">Meta Title</label>
-                            <input type="text" class="form-control" value="Novyra Marketing - Digital Marketing Agency">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Meta Description</label>
-                            <textarea class="form-control">Novyra Marketing helps businesses grow through strategic digital marketing, compelling branding, and results-driven campaigns.</textarea>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Keywords</label>
-                            <input type="text" class="form-control" value="digital marketing, branding, SEO, social media">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </form>
-                </div>
-
-                <div class="tab-content" id="social-tab">
-                    <form>
-                        <div class="form-group">
-                            <label class="form-label">Facebook URL</label>
-                            <input type="text" class="form-control" value="https://facebook.com/novyra">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Twitter URL</label>
-                            <input type="text" class="form-control" value="https://twitter.com/novyra">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Instagram URL</label>
-                            <input type="text" class="form-control" value="https://instagram.com/novyra">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">LinkedIn URL</label>
-                            <input type="text" class="form-control" value="https://linkedin.com/company/novyra">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </form>
-                </div>
-
-                <div class="tab-content" id="security-tab">
-                    <form>
-                        <div class="form-group">
-                            <label class="form-label">Two-Factor Authentication</label>
-                            <div>
-                                <label style="display: flex; align-items: center; gap: 0.5rem;">
-                                    <input type="checkbox" checked>
-                                    <span>Enable two-factor authentication</span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Login Attempts</label>
-                            <input type="number" class="form-control" value="5">
-                            <small>Number of failed login attempts before lockout</small>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Session Timeout</label>
-                            <input type="number" class="form-control" value="60">
-                            <small>Session timeout in minutes</small>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </form>
-                </div>
-            </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
+
+        <!-- Portfolio Section -->
+        <div class="section" id="portfolio-section">
+          <div class="section-header">
+            <h2>Portfolio Items</h2>
+            <a href="#" class="btn btn-primary" id="add-portfolio-btn"
+              >Add New Item</a
+            >
+          </div>
+          <div class="cards-grid">
+            <div class="card">
+              <div class="card-img">
+                <i class="fas fa-briefcase"></i>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">TechSolutions Website</h3>
+                <p class="card-text">
+                  Complete website redesign and digital marketing strategy for a
+                  tech startup.
+                </p>
+                <div class="card-meta">
+                  <span>Web Design</span>
+                  <span>Oct 2023</span>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-img">
+                <i class="fas fa-briefcase"></i>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">BrandFuture Campaign</h3>
+                <p class="card-text">
+                  Social media marketing campaign for a fashion brand launch.
+                </p>
+                <div class="card-meta">
+                  <span>Social Media</span>
+                  <span>Sep 2023</span>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-img">
+                <i class="fas fa-briefcase"></i>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">E-commerce SEO</h3>
+                <p class="card-text">
+                  SEO optimization and content strategy for an online retailer.
+                </p>
+                <div class="card-meta">
+                  <span>SEO</span>
+                  <span>Aug 2023</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Users Section -->
+        <div class="section" id="users-section">
+          <div class="section-header">
+            <h2>Users</h2>
+            <a href="#" class="btn btn-primary" id="add-user-btn"
+              >Add New User</a
+            >
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Status</th>
+                  <th>Last Login</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div style="display: flex; align-items: center">
+                      <div
+                        class="user-avatar"
+                        style="
+                          width: 30px;
+                          height: 30px;
+                          font-size: 0.8rem;
+                          margin-right: 0.5rem;
+                        "
+                      >
+                        MA
+                      </div>
+                      Michael Admin
+                    </div>
+                  </td>
+                  <td>michael@novyra.com</td>
+                  <td>Administrator</td>
+                  <td><span class="status published">Active</span></td>
+                  <td>Today, 09:45 AM</td>
+                  <td>
+                    <div class="action-buttons">
+                      <button class="btn btn-sm btn-outline">Edit</button>
+                      <button class="btn btn-sm btn-danger">Delete</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style="display: flex; align-items: center">
+                      <div
+                        class="user-avatar"
+                        style="
+                          width: 30px;
+                          height: 30px;
+                          font-size: 0.8rem;
+                          margin-right: 0.5rem;
+                          background: var(--success);
+                        "
+                      >
+                        SJ
+                      </div>
+                      Sarah Johnson
+                    </div>
+                  </td>
+                  <td>sarah@novyra.com</td>
+                  <td>Editor</td>
+                  <td><span class="status published">Active</span></td>
+                  <td>Yesterday, 03:20 PM</td>
+                  <td>
+                    <div class="action-buttons">
+                      <button class="btn btn-sm btn-outline">Edit</button>
+                      <button class="btn btn-sm btn-danger">Delete</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style="display: flex; align-items: center">
+                      <div
+                        class="user-avatar"
+                        style="
+                          width: 30px;
+                          height: 30px;
+                          font-size: 0.8rem;
+                          margin-right: 0.5rem;
+                          background: var(--warning);
+                        "
+                      >
+                        MC
+                      </div>
+                      Michael Chen
+                    </div>
+                  </td>
+                  <td>michael.c@novyra.com</td>
+                  <td>Author</td>
+                  <td><span class="status published">Active</span></td>
+                  <td>Oct 15, 2023</td>
+                  <td>
+                    <div class="action-buttons">
+                      <button class="btn btn-sm btn-outline">Edit</button>
+                      <button class="btn btn-sm btn-danger">Delete</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Settings Section -->
+        <div class="section" id="settings-section">
+          <h2>Settings</h2>
+          <div class="tabs">
+            <div class="tab active" data-tab="general">General</div>
+            <div class="tab" data-tab="seo">SEO</div>
+            <div class="tab" data-tab="social">Social Media</div>
+            <div class="tab" data-tab="security">Security</div>
+          </div>
+
+          <div class="tab-content active" id="general-tab">
+            <form>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Site Title</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="Novyra Marketing"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Tagline</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="Digital Marketing Agency"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Site Description</label>
+                <textarea class="form-control">
+We help businesses grow through strategic digital marketing, compelling branding, and results-driven campaigns.</textarea
+                >
+              </div>
+              <div class="form-group">
+                <label class="form-label">Admin Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  value="admin@novyra.com"
+                />
+              </div>
+              <button type="submit" class="btn btn-primary">
+                Save Changes
+              </button>
+            </form>
+          </div>
+
+          <div class="tab-content" id="seo-tab">
+            <form>
+              <div class="form-group">
+                <label class="form-label">Meta Title</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  value="Novyra Marketing - Digital Marketing Agency"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Meta Description</label>
+                <textarea class="form-control">
+Novyra Marketing helps businesses grow through strategic digital marketing, compelling branding, and results-driven campaigns.</textarea
+                >
+              </div>
+              <div class="form-group">
+                <label class="form-label">Keywords</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  value="digital marketing, branding, SEO, social media"
+                />
+              </div>
+              <button type="submit" class="btn btn-primary">
+                Save Changes
+              </button>
+            </form>
+          </div>
+
+          <div class="tab-content" id="social-tab">
+            <form>
+              <div class="form-group">
+                <label class="form-label">Facebook URL</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  value="https://facebook.com/novyra"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Twitter URL</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  value="https://twitter.com/novyra"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Instagram URL</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  value="https://instagram.com/novyra"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label">LinkedIn URL</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  value="https://linkedin.com/company/novyra"
+                />
+              </div>
+              <button type="submit" class="btn btn-primary">
+                Save Changes
+              </button>
+            </form>
+          </div>
+
+          <div class="tab-content" id="security-tab">
+            <form>
+              <div class="form-group">
+                <label class="form-label">Two-Factor Authentication</label>
+                <div>
+                  <label
+                    style="display: flex; align-items: center; gap: 0.5rem"
+                  >
+                    <input type="checkbox" checked />
+                    <span>Enable two-factor authentication</span>
+                  </label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Login Attempts</label>
+                <input type="number" class="form-control" value="5" />
+                <small>Number of failed login attempts before lockout</small>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Session Timeout</label>
+                <input type="number" class="form-control" value="60" />
+                <small>Session timeout in minutes</small>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                Save Changes
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Add Blog Post Modal -->
     <div class="modal" id="add-blog-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Add New Blog Post</h3>
-                <button class="close-modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label class="form-label">Title</label>
-                        <input type="text" class="form-control" placeholder="Enter post title">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Content</label>
-                        <textarea class="form-control" rows="6" placeholder="Enter post content"></textarea>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">Author</label>
-                            <select class="form-control">
-                                <option>Sarah Johnson</option>
-                                <option>Michael Chen</option>
-                                <option>Emily Rodriguez</option>
-                                <option>David Wilson</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Status</label>
-                            <select class="form-control">
-                                <option>Published</option>
-                                <option>Draft</option>
-                                <option>Pending Review</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Categories</label>
-                        <input type="text" class="form-control" placeholder="Enter categories separated by commas">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Featured Image</label>
-                        <input type="file" class="form-control">
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-outline close-modal">Cancel</button>
-                <button class="btn btn-primary">Publish Post</button>
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Add New Blog Post</h3>
+          <button class="close-modal">&times;</button>
         </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label class="form-label">Title</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter post title"
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Content</label>
+              <textarea
+                class="form-control"
+                rows="6"
+                placeholder="Enter post content"
+              ></textarea>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Author</label>
+                <select class="form-control">
+                  <option>Sarah Johnson</option>
+                  <option>Michael Chen</option>
+                  <option>Emily Rodriguez</option>
+                  <option>David Wilson</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Status</label>
+                <select class="form-control">
+                  <option>Published</option>
+                  <option>Draft</option>
+                  <option>Pending Review</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Categories</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter categories separated by commas"
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Featured Image</label>
+              <input type="file" class="form-control" />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline close-modal">Cancel</button>
+          <button class="btn btn-primary">Publish Post</button>
+        </div>
+      </div>
     </div>
 
     <script>
-        // Navigation between sections
-        document.querySelectorAll('.menu-item').forEach(item => {
-            item.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // Remove active class from all menu items
-                document.querySelectorAll('.menu-item').forEach(i => {
-                    i.classList.remove('active');
-                });
-                
-                // Add active class to clicked menu item
-                this.classList.add('active');
-                
-                // Hide all sections
-                document.querySelectorAll('.section').forEach(section => {
-                    section.classList.remove('active');
-                });
-                
-                // Show selected section
-                const sectionId = this.getAttribute('data-section') + '-section';
-                document.getElementById(sectionId).classList.add('active');
-            });
+      // Navigation between sections
+      document.querySelectorAll(".menu-item").forEach((item) => {
+        item.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          // Remove active class from all menu items
+          document.querySelectorAll(".menu-item").forEach((i) => {
+            i.classList.remove("active");
+          });
+
+          // Add active class to clicked menu item
+          this.classList.add("active");
+
+          // Hide all sections
+          document.querySelectorAll(".section").forEach((section) => {
+            section.classList.remove("active");
+          });
+
+          // Show selected section
+          const sectionId = this.getAttribute("data-section") + "-section";
+          document.getElementById(sectionId).classList.add("active");
         });
+      });
 
-        // Tab functionality in settings
-        document.querySelectorAll('.tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                // Remove active class from all tabs
-                document.querySelectorAll('.tab').forEach(t => {
-                    t.classList.remove('active');
-                });
-                
-                // Add active class to clicked tab
-                this.classList.add('active');
-                
-                // Hide all tab contents
-                document.querySelectorAll('.tab-content').forEach(content => {
-                    content.classList.remove('active');
-                });
-                
-                // Show selected tab content
-                const tabId = this.getAttribute('data-tab') + '-tab';
-                document.getElementById(tabId).classList.add('active');
-            });
+      // Tab functionality in settings
+      document.querySelectorAll(".tab").forEach((tab) => {
+        tab.addEventListener("click", function () {
+          // Remove active class from all tabs
+          document.querySelectorAll(".tab").forEach((t) => {
+            t.classList.remove("active");
+          });
+
+          // Add active class to clicked tab
+          this.classList.add("active");
+
+          // Hide all tab contents
+          document.querySelectorAll(".tab-content").forEach((content) => {
+            content.classList.remove("active");
+          });
+
+          // Show selected tab content
+          const tabId = this.getAttribute("data-tab") + "-tab";
+          document.getElementById(tabId).classList.add("active");
         });
+      });
 
-        // Modal functionality
-        const addBlogBtn = document.getElementById('add-blog-btn');
-        const addBlogModal = document.getElementById('add-blog-modal');
-        const closeModalBtns = document.querySelectorAll('.close-modal');
+      // Modal functionality
+      const addBlogBtn = document.getElementById("add-blog-btn");
+      const addBlogModal = document.getElementById("add-blog-modal");
+      const closeModalBtns = document.querySelectorAll(".close-modal");
 
-        if (addBlogBtn) {
-            addBlogBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                addBlogModal.classList.add('active');
-            });
+      if (addBlogBtn) {
+        addBlogBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          addBlogModal.classList.add("active");
+        });
+      }
+
+      closeModalBtns.forEach((btn) => {
+        btn.addEventListener("click", function () {
+          addBlogModal.classList.remove("active");
+        });
+      });
+
+      // Close modal when clicking outside
+      window.addEventListener("click", function (e) {
+        if (e.target === addBlogModal) {
+          addBlogModal.classList.remove("active");
         }
+      });
 
-        closeModalBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                addBlogModal.classList.remove('active');
-            });
-        });
-
-        // Close modal when clicking outside
-        window.addEventListener('click', function(e) {
-            if (e.target === addBlogModal) {
-                addBlogModal.classList.remove('active');
-            }
-        });
-
-        // Add similar functionality for other modals (portfolio, users)
-        // This is a simplified example for the blog modal
+      // Add similar functionality for other modals (portfolio, users)
+      // This is a simplified example for the blog modal
     </script>
-</body>
+  </body>
 </html>
-
-
-
-
