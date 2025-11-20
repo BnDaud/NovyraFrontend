@@ -6,6 +6,7 @@ import Settings from "./pages/settings";
 import User from "./pages/user";
 import Portfolio from "./pages/portfolio";
 import useFetch from "./hooks/usefetch";
+import { API } from "./endpoints/endpoints";
 
 function App() {
   const homeRef = useRef(null); //Dashboard
@@ -13,7 +14,9 @@ function App() {
   const portfolioRef = useRef(null);
   const userRef = useRef(null);
   const settingRef = useRef(null);
-  useFetch({ url: "https://novyra.onrender.com/api/blogs/" });
+  //useFetch({ url: "https://novyra.onrender.com/api/blogs/?format=json" });
+  //  useFetch({ url: "http://localhost:8000/api/gettotal?format=json" });
+  //  useFetch({ url: API.portfolio() });
   const sectionref = {
     1: homeRef,
     2: blogRef,

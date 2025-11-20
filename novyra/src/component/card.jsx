@@ -12,13 +12,13 @@ function Card({
 }) {
   return (
     <div className={containerstyle}>
-      {total ? (
+      {!topic ? (
         <div className={logostyle}> {logo}</div>
       ) : (
         <img src={logo} alt="" className={logostyle} />
       )}
       <div>
-        <div className="text-3xl font-bold"> {total || topic}</div>
+        <div className="text-3xl font-bold"> {topic || total}</div>
         <div className="text-gray text-wrap mt-1">{description}</div>
       </div>
       <div
