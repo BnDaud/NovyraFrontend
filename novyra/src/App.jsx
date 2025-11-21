@@ -6,7 +6,6 @@ import Settings from "./pages/settings";
 import User from "./pages/user";
 import Portfolio from "./pages/portfolio";
 import useFetch from "./hooks/usefetch";
-import { API } from "./endpoints/endpoints";
 
 function App() {
   const homeRef = useRef(null); //Dashboard

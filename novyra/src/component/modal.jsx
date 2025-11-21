@@ -1,8 +1,53 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import { AiOutlineLoading } from "react-icons/ai";
+import useFetch from "../hooks/usefetch";
 
-function Modal({ togglestate, fields = [] }) {
+function Modal({
+  togglestate,
+  fields = [],
+  payload,
+
+  method = "GET",
+  url,
+  buttonstyle,
+}) {
+  const [submit, setSubmit] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    setSubmit(!submit);
+  };
+
+  const { data, loading, err, success, doFetch } = useFetch();
+  useEffect(() => {
+    if (submit) {
+      let body = undefined;
+
+      // Only attach form if method supports body
+      if (["POST", "PUT", "PATCH"].includes(method)) {
+        body = new FormData();
+        Object.entries(payload || {}).forEach(([key, value]) =>
+          body.append(key, value)
+        );
+      }
+
+      doFetch({
+        url,
+        method,
+        body,
+      });
+
+      setSubmit(false);
+    }
+  }, [submit]);
+
+  useEffect(() => {
+    if (success) togglestate();
+  }, [success]);
+
   return (
-    <div
+    <form
       className="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm z-50 overflow-auto p-4"
       onClick={togglestate}
     >
@@ -28,16 +73,23 @@ function Modal({ togglestate, fields = [] }) {
           <div className="mt-4 w-full flex justify-center md:justify-end">
             <button
               type="submit"
-              className="bg-amber-500 text-white py-2 px-6 rounded-lg font-semibold hover:bg-amber-600 transition w-full md:w-auto"
+              className={buttonstyle}
+              onClick={(e) => handleSubmit(e)}
             >
-              Submit
+              {loading ? (
+                <div className="flex justify-center">
+                  <AiOutlineLoading className="text-2xl animate-spin" />
+                </div>
+              ) : (
+                "Submit"
+              )}
             </button>
           </div>
         ) : (
           ""
         )}
       </div>
-    </div>
+    </form>
   );
 }
 

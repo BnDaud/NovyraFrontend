@@ -1,43 +1,62 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 
-function useFetch({ url, method = "GET", body }) {
+function useFetch() {
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [success, setSuccess] = useState(false); // ⭐ new
+  const [loading, setLoading] = useState(false);
   const [err, setErr] = useState(null);
 
-  useEffect(() => {
-    let ignore = false;
+  const doFetch = async ({ url, method = "GET", body }) => {
+    setLoading(true);
+    setSuccess(false); // reset
+    setData(null); // reset old data
 
-    const fetchdata = async () => {
-      setLoading(true);
-      try {
-        const req = await fetch(url, {
-          method: method,
-          headers: {
-            "Content-Type": "Application/json",
-          },
-          body: body ? JSON.stringify(body) : undefined,
+    try {
+      const isFormData = body instanceof FormData;
+
+      const res = await fetch(url, {
+        method,
+        headers: isFormData
+          ? undefined
+          : { "Content-Type": "application/json" },
+        body: isFormData ? body : body ? JSON.stringify(body) : null,
+      });
+
+      if (!res.ok) {
+        let errorData;
+        try {
+          errorData = await res.json();
+        } catch {
+          errorData = await res.text();
+        }
+        console.error("Fetch error:", {
+          status: res.status,
+          statusText: res.statusText,
+          structure: errorData,
         });
-        if (!req.ok) throw new Error("Bad Request");
 
-        const data = await req.json();
-        if (!ignore) setData(data);
-        //  console.log(data);
-      } catch (e) {
-        console.log(e);
-        if (!ignore) setErr(e);
-      } finally {
-        if (!ignore) setLoading(false);
+        throw new Error(`Bad Request: ${res.status} ${res.statusText}`);
       }
-    };
-    fetchdata();
 
-    return () => {
-      ignore = true;
-    };
-  }, [url, method, body]);
+      // ⭐ Handle DELETE (no JSON body)
+      let json = null;
+      try {
+        json = await res.json();
+      } catch (_) {
+        // No JSON returned → DELETE or empty response
+      }
 
-  return { data, loading, err };
+      setData(json);
+      setSuccess(true); // ⭐ mark request as successful
+    } catch (e) {
+      console.error("Caught fetch error:", e);
+      setErr(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { data, success, loading, err, doFetch };
 }
 
 export default useFetch;

@@ -1,6 +1,6 @@
 const BASEURL = "http://localhost:8000/api";
 
-export const API = {
+const API = {
   gettotal: () => `${BASEURL}/gettotal?format=json`,
 
   users: (arg = "") => `${BASEURL}/user${arg && "/" + arg}/?format=json`,
@@ -10,3 +10,5 @@ export const API = {
 
   blogs: (arg = "") => `${BASEURL}/blogs${arg && "/" + arg}/?format=json`,
 };
+
+export default API;

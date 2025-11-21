@@ -16,7 +16,7 @@ function Settings() {
     <div className="bg-light rounded-2xl min-h-50 shadow-2xl p-6">
       <div className="mt-2 mb-5 border-b pb-3 border-gray/30">
         <p className="text-3xl font-bold">Settings</p>
-        <div className="flex gap-x-5 mt-5">
+        <div className="flex md:gap-x-5 mt-5">
           {tabs.map((tab) => (
             <p
               key={tab.name}
