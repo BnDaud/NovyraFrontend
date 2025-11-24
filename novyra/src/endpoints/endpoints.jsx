@@ -9,6 +9,7 @@ const API = {
     `${BASEURL}/portfolio${arg && "/" + arg}/?format=json`,
 
   blogs: (arg = "") => `${BASEURL}/blogs${arg && "/" + arg}/?format=json`,
+  metadata: (arg = "") => `${BASEURL}/metadata${arg && "/" + arg}/?format=json`,
 };
 
 export default API;

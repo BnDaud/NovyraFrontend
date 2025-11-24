@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SectionCard from "../component/sectioncard";
 import API from "../endpoints/endpoints";
 import useFetch from "../hooks/usefetch";
 import { AiOutlineLoading } from "react-icons/ai";
+import { globalContext } from "../App";
 
 function User() {
   const url = API.users();
   const { data, loading, err, doFetch } = useFetch();
   const [dummyData, setDummyData] = useState([]);
+  const { setAllUsers, allusers } = useContext(globalContext);
 
   useEffect(() => {
     doFetch({
@@ -17,7 +19,7 @@ function User() {
   }, []);
 
   useEffect(() => {
-    if (data) setDummyData(data);
+    if (data) setAllUsers(data);
   }, [data]);
 
   //console.log(data);
@@ -146,12 +148,13 @@ function User() {
             name={"Users"}
             button={"Add New User"}
             thead={{ username: "", email: "", phone: "", role: "" }} //
-            tbody={dummyData}
+            tbody={allusers}
             fields={userFields}
             payload={userdata}
-            method={"POST"}
             url={API.users}
-            setUserdata={setUserdata}
+            updatepayload={setUserdata}
+            updatedata={setAllUsers}
+            incrementkey={"TotalUsers"}
           />
         </div>
       </div>
@@ -160,3 +163,4 @@ function User() {
 }
 
 export default User;
+/*  return Response({"TotalBlogs": blogs ,"TotalPortfolio": portfolio , "TotalUsers":user} */

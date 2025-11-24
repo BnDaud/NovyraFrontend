@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Card from "../component/card";
 import SectionCard from "../component/sectioncard";
 
@@ -7,8 +7,10 @@ import { FaBlog, FaBriefcase, FaUsers, FaEye } from "react-icons/fa";
 
 import useFetch from "../hooks/usefetch";
 import API from "../endpoints/endpoints";
+import { globalContext } from "../App";
 
 const DashBoard = () => {
+  const { total, setTotals, allblogs, setAllBlogs } = useContext(globalContext);
   // Fetch totals
   const {
     data: totalData,
@@ -37,7 +39,7 @@ const DashBoard = () => {
     <AiOutlineLoading className="text-amber-600 animate-spin" />
   );
 
-  const [content, setContent] = useState([
+  const [card, setCard] = useState([
     {
       name: "TotalBlogs",
       logo: <FaBlog className="text-2xl text-blue-600" />,
@@ -75,22 +77,51 @@ const DashBoard = () => {
   // Update totals when data changes
   useEffect(() => {
     if (totalData) {
-      setContent((prev) =>
+      setTotals(totalData); // update totals
+
+      const newTotal = { ...totalData }; // use the latest totals
+      setCard((prev) =>
         prev.map((p) => ({
           ...p,
-          total: totalData?.[p.name] ?? p.total,
+          total: newTotal[p.name] ?? p.total, // use newTotal instead of stale total
         }))
       );
     }
   }, [totalData]);
 
-  // Set dummy blog data
-  const [dummyData, setDummyData] = useState([]);
   useEffect(() => {
-    if (blogs) setDummyData(blogs);
+    setTotals(total);
+    console.log(total);
+    const newTotal = { ...total }; // use the latest totals
+    setCard((prev) =>
+      prev.map((p) => ({
+        ...p,
+        total: newTotal[p.name] ?? p.total, // use newTotal instead of stale total
+      }))
+    );
+  }, [total]);
+
+  // Set dummy blog data
+
+  useEffect(() => {
+    if (blogs) setAllBlogs(blogs);
   }, [blogs]);
 
   // Form field styles and options
+  const [blogData, setBlogData] = useState({
+    title: "",
+    author: "",
+    content: "",
+    excerpt: "",
+    featured_image: null,
+    category: "",
+    status: "",
+    views_count: 0,
+  });
+
+  const updateBlogData = (arg, newdata) =>
+    setBlogData((prev) => ({ ...prev, [arg]: newdata }));
+
   const inputStyle =
     "bg-amber-300 px-3 py-2 border border-amber-400 rounded w-full focus:outline-none focus:ring-2 focus:ring-amber-400";
 
@@ -110,29 +141,69 @@ const DashBoard = () => {
   const statusOptions = ["Draft", "Published"];
 
   const fields = [
-    <div>
+    <div className="w-full">
       <label className="font-semibold mb-1 block">Title</label>
-      <input placeholder="Title" className={inputStyle} />
+      <input
+        placeholder="Title"
+        className={inputStyle}
+        required
+        value={blogData.title}
+        onChange={(e) => updateBlogData("title", e.target.value)}
+      />
     </div>,
-    <div>
+
+    <div className="w-full">
       <label className="font-semibold mb-1 block">Author</label>
-      <input placeholder="Author" className={inputStyle} />
+      <input
+        placeholder="Author"
+        className={inputStyle}
+        required
+        value={blogData.author}
+        onChange={(e) => updateBlogData("author", e.target.value)}
+      />
     </div>,
-    <div>
+
+    <div className="w-full">
       <label className="font-semibold mb-1 block">Content</label>
-      <textarea placeholder="Content" className={`${inputStyle} h-24`} />
+      <textarea
+        placeholder="Content"
+        className={`${inputStyle} h-24`}
+        required
+        value={blogData.content}
+        onChange={(e) => updateBlogData("content", e.target.value)}
+      />
     </div>,
-    <div>
+
+    <div className="w-full">
       <label className="font-semibold mb-1 block">Excerpt</label>
-      <textarea placeholder="Excerpt" className={`${inputStyle} h-16`} />
+      <textarea
+        placeholder="Excerpt"
+        className={`${inputStyle} h-16`}
+        required
+        value={blogData.excerpt}
+        onChange={(e) => updateBlogData("excerpt", e.target.value)}
+      />
     </div>,
-    <div>
+
+    <div className="w-full">
       <label className="font-semibold mb-1 block">Image</label>
-      <input type="file" accept="image/*" className={inputStyle} />
+      <input
+        type="file"
+        accept="image/*"
+        className={inputStyle}
+        required
+        onChange={(e) => updateBlogData("featured_image", e.target.files[0])}
+      />
     </div>,
-    <div>
+
+    <div className="w-full">
       <label className="font-semibold mb-1 block">Category</label>
-      <select className={inputStyle} defaultValue="">
+      <select
+        className={inputStyle}
+        required
+        value={blogData.category}
+        onChange={(e) => updateBlogData("category", e.target.value)}
+      >
         <option value="" disabled>
           Select Category
         </option>
@@ -143,9 +214,15 @@ const DashBoard = () => {
         ))}
       </select>
     </div>,
-    <div>
+
+    <div className="w-full">
       <label className="font-semibold mb-1 block">Status</label>
-      <select className={inputStyle} defaultValue="">
+      <select
+        className={inputStyle}
+        required
+        value={blogData.status}
+        onChange={(e) => updateBlogData("status", e.target.value)}
+      >
         <option value="" disabled>
           Select Status
         </option>
@@ -163,7 +240,7 @@ const DashBoard = () => {
       <p className="text-4xl font-bold mb-4">Dashboard</p>
 
       <div className="flex flex-wrap gap-4 justify-center-safe">
-        {content.map((item) => (
+        {card.map((item) => (
           <Card
             key={item.name}
             logo={item.logo}
@@ -179,9 +256,21 @@ const DashBoard = () => {
         <SectionCard
           name="Recent Blog Posts"
           button="Add New Blog"
-          thead={dummyData[0]}
-          tbody={dummyData}
+          thead={{
+            title: "",
+            author: "",
+            excerpt: "",
+            category: "",
+            status: "",
+            views_count: "",
+          }}
+          tbody={allblogs}
           fields={fields}
+          payload={blogData}
+          url={API.blogs}
+          updatepayload={setBlogData}
+          updatedata={setAllBlogs}
+          incrementkey={"TotalBlogs"}
         />
       </div>
     </div>

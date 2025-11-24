@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineLoading } from "react-icons/ai";
 import Modal from "./modal";
-
+import { v4 as uuidv4 } from "uuid";
 function SectionCard({
   name,
   thead,
   button,
   tbody,
   fields,
-  payload,
-  method,
-  url,
-  setUserdata,
+  payload = {},
+  url = "",
+  updatepayload,
+  incrementkey,
+  updatedata = null, // a function that update the overall data
 }) {
   const [indexStatus, setIndexStatus] = useState();
   const statusStyle = {
@@ -29,7 +30,6 @@ function SectionCard({
   const [editdata, setEditData] = useState(false);
   const [deletedata, setDeleteData] = useState(false);
   const [id, setId] = useState(0);
-  const [editPayload, setEditPayload] = useState(null);
 
   const toggleaddnew = () => {
     setAddNew(!addNew);
@@ -38,7 +38,7 @@ function SectionCard({
   const handledit = (id_, obj) => {
     // const selected = tbody.find((item) => item.id === id_);
     //setEditPayload(obj);
-    setUserdata((prev) => ({ ...prev, ...obj }));
+    updatepayload((prev) => ({ ...prev, ...obj }));
     setId(id_);
     setEditData(!editdata);
   };
@@ -73,11 +73,14 @@ function SectionCard({
           togglestate={toggleaddnew}
           fields={fields}
           payload={payload} //data structure to be submit
-          method={method}
+          method={"POST"}
           url={url()}
+          dataTobeUpdated={tbody}
+          updatedata={updatedata}
           buttonstyle={
             "bg-amber-500 text-white py-2 px-6 rounded-lg font-semibold hover:bg-amber-600 transition w-full md:w-auto"
           }
+          incrementkey={incrementkey}
         />
       ) : null}
       {editdata ? (
@@ -87,9 +90,13 @@ function SectionCard({
           payload={payload} //data structure to be submit
           method={"PUT"}
           url={url(id)}
+          id={id} //
+          updatedata={updatedata}
+          dataTobeUpdated={tbody}
           buttonstyle={
             "bg-blue-500 text-white py-2 px-6 rounded-lg font-semibold hover:bg-blue-600 transition w-full md:w-auto"
           }
+          incrementkey={incrementkey}
         />
       ) : null}
       {deletedata ? (
@@ -105,7 +112,11 @@ function SectionCard({
             "bg-red-400 text-white py-2 px-6 rounded-lg font-semibold hover:bg-red-600 transition w-full md:w-auto"
           }
           url={url(id)}
+          id={id}
+          updatedata={updatedata}
+          dataTobeUpdated={tbody}
           method="DELETE"
+          incrementkey={incrementkey}
         />
       ) : null}
       <div className="flex flex-wrap justify-between gap-6 mt-2 mb-5 border-b pb-5 border-gray/30">
@@ -122,9 +133,11 @@ function SectionCard({
         {tbody.length > 0 ? (
           <table className="table-auto min-w-max md:w-full">
             <thead className="bg-gray/5 h-12">
-              <tr className="mx-2">
+              <tr key={uuidv4()} className="mx-2">
                 {keys.map((p) => (
-                  <th className="capitalize">{p}</th>
+                  <th key={uuidv4()} className="capitalize">
+                    {p}
+                  </th>
                 ))}
                 <th> Actions</th>
               </tr>
@@ -132,12 +145,12 @@ function SectionCard({
             <tbody>
               {tbody.map((obj, rowIndex) => (
                 <tr
-                  key={rowIndex}
+                  key={uuidv4()}
                   className="hover:bg-gray-50 border-b border-gray-200 h-15"
                 >
                   {pullValues(obj).map((content, index) => (
                     <td
-                      key={index}
+                      key={uuidv4()}
                       className="px-4 py-2 max-w-xs capitalize" // fixed or max width required for truncate
                     >
                       <div

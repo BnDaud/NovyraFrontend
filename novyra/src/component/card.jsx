@@ -10,6 +10,13 @@ function Card({
   category,
   year,
 }) {
+  function formatDate(dateString) {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    const options = { day: "2-digit", month: "short" }; // "23 Oct"
+    return date.toLocaleDateString("en-US", options);
+  }
+
   return (
     <div className={containerstyle}>
       {!topic ? (
@@ -29,7 +36,7 @@ function Card({
         }`}
       >
         <p> {category}</p>
-        <p>{year}</p>
+        <p>{formatDate(year)}</p>
       </div>
     </div>
   );
